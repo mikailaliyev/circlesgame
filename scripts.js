@@ -31,6 +31,11 @@ const startStopwatch = () => {
   setInterval(() => {
     stopwatch++;
     stopwatchArea.innerText = `Stopwatch: ${stopwatch}`
+    if (stopwatch == 10 && score < 10) {
+      alert("You LOST!")
+      clearInterval(startStopwatch(), 1000)
+      location.reload()
+    }
   }, 1000)
 }
 
@@ -38,10 +43,10 @@ const startStopwatch = () => {
 //Getting mouse coordinates and drawind a circle based on that info
 canvas.addEventListener('click', (event) => {
   clickCounter++
-  if(clickCounter <= 1) {
+  if (clickCounter <= 1) {
     startStopwatch()
-  } 
-  
+  }
+
   mouseOld.x = mouse.x
   mouseOld.y = mouse.y
   mouse.x = event.x;
@@ -49,14 +54,10 @@ canvas.addEventListener('click', (event) => {
   drawCircle()
 
 
-  if(((Math.abs(mouseOld.x - event.x) <= 50 &&  Math.abs(mouseOld.y - event.y) <= 50)) 
-  && ((Math.abs(mouseOld.x - event.x) > 5 && Math.abs(mouseOld.y - event.y) > 5))) {
+  if (((Math.abs(mouseOld.x - event.x) <= 50 && Math.abs(mouseOld.y - event.y) <= 50))
+    && ((Math.abs(mouseOld.x - event.x) > 5 && Math.abs(mouseOld.y - event.y) > 5))) {
     score++;
     scorePlace.innerText = score
-  } 
-
-  if(stopwatch == 10 && score < 10) {
-    alert("You LOST!")
   }
 })
 
