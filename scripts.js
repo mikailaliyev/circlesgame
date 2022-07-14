@@ -3,6 +3,7 @@ const stopwatchArea = document.getElementById("stopwatch")
 let score = 0
 let stopwatch = 0
 let clickCounter = 0
+let interval
 const canvas = document.getElementById('canvas1')
 const ctx = canvas.getContext('2d')
 canvas.width = window.innerWidth
@@ -28,12 +29,12 @@ const mouseOld = {
 
 //creating stopwatch
 const startStopwatch = () => {
-  setInterval(() => {
+  interval = setInterval(() => {
     stopwatch++;
     stopwatchArea.innerText = `Stopwatch: ${stopwatch}`
     if (stopwatch == 10 && score < 10) {
+      clearInterval(interval)
       alert("You LOST!")
-      clearInterval(startStopwatch(), 1000)
       location.reload()
     }
   }, 1000)
